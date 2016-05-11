@@ -11,8 +11,7 @@ const config = {
   ],
   output: {
     path: join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/'
+    filename: 'bundle.js'
   },
   module: {
     loaders: [{
@@ -22,7 +21,7 @@ const config = {
       query: { ...JSON.parse(babelrc) }
     }]
   },
-  plugins :[
+  plugins: [
     new HtmlWebpackPlugin({
       template: join(__dirname, 'src', 'index.html'),
       minify: {
