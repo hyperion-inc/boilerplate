@@ -1,5 +1,6 @@
 import { join } from 'path';
 import fs from 'fs';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 const babelrc = fs.readFileSync(join(__dirname, '.babelrc'), 'utf8');
 
 const config = {
@@ -11,7 +12,7 @@ const config = {
   output: {
     path: join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/dist'
+    publicPath: '/'
   },
   module: {
     loaders: [{
@@ -20,7 +21,17 @@ const config = {
       exclude: /node_modules/,
       query: { ...JSON.parse(babelrc) }
     }]
-  }
+  },
+  plugins :[
+    new HtmlWebpackPlugin({
+      template: join(__dirname, 'src', 'index.html'),
+      minify: {
+        removeComments: true,
+        keepClosingSlash: true
+      },
+      inject: true
+    })
+  ]
 };
 
 export default config;
